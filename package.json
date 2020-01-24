@@ -1,0 +1,31 @@
+{
+  "name": "notes.ru",
+  "version": "1.0.0",
+  "description": "simple note CRUD nodejs mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "node server.js",
+    "satrt": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fxded/notes.ru.git"
+  },
+  "keywords": [
+    "db",
+    "note",
+    "node"
+  ],
+  "author": "Vasiliy Votintseff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fxded/notes.ru/issues"
+  },
+  "homepage": "https://github.com/fxded/notes.ru#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.2"
+  }
+}
