@@ -1,11 +1,12 @@
+// server.js
 const   port        = process.env.PORT || 3003,
         express     = require('express'),
         MongoClient = require('mongodb').MongoClient,
         bodyParser  = require('body-parser');
         app         = express();
         
-        
-//    io = socket.listen(app.listen(port));
+require('./app/routes')(app, {});
+
 app.listen(port, () => {
     console.log('Listen on ' + port + ' dir ' + __dirname);
 });
