@@ -3,17 +3,17 @@
 
 
 document.querySelector('#btnsnd').onclick = function () {
-    let fname = document.querySelector('#fname'),
-        lname = document.querySelector('#lname');
+    let fname = document.querySelector('#fname').value,
+        lname = document.querySelector('#lname').value;
     
-    let data = { fname1: fname.value,
-                 lname1: lname.value  };
-    ajax('/', 'POST', showData(data), requestData(data));
+    let data = JSON.stringify({ fname: fname,
+                                lname: lname  });
+    ajax('/', 'POST', showData, /*requestData(*/data/*)*/);
 }
 
 
 
 function showData(data) {
-    //data = JSON.parse(data);
-    console.log(data);
+    data = JSON.parse(data.response);
+    console.log('data: '+data.lname, data.fname);
 }

@@ -15,12 +15,16 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req,res){
     res.sendfile('index.html');
+    res.end();
 });
 
 app.post ('/', function(req,res){
     req.on('data', function(data){
-        console.log('requset: ', data.toString());   
-        res.write('Write: '+ data.toString());
+        console.log('requset: ', data.toString());
+        res.send(data);
+        //res.json(data);//(JSON.stringify({"Write": data.toString()}), (err) => {
+        //    console.log(err);
+        //});
     });
     req.on('end', function(){
         console.log('the end ');
