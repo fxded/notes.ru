@@ -2,32 +2,28 @@
 const   port        = process.env.PORT || 3003,
         express     = require('express'),
         MongoClient = require('mongodb').MongoClient,
-        bodyParser  = require('body-parser');
-        app         = express();
-        
-require('./app/routes')(app, {});
+        bodyParser  = require('body-parser'),
+        db          = require('./config/db'),
+        dbClient    = new MongoClient(db.url, { useUnifiedTopology: true });
 
-app.listen(port, () => {
-    console.log('Listen on ' + port + ' dir ' + __dirname);
+app = express();
+        
+app.use(express.static(__dirname + '/public'));
+
+dbClient.connect(err => {
+    if (err) return console.log(err);
+    const dbase = dbClient.db();   
+    require('./app/routes')(app, dbase);
+    app.listen(port, () => {
+        console.log('Listen on ' + port + ' dir ' + __dirname + 
+                    ' dbase: ' +  dbase.namespace);
+    });
+    //console.log(dbase);
+    //dbClient.close();
 });
 
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req,res){
     res.sendfile('index.html');
     res.end();
-});
-
-app.post ('/', function(req,res){
-    req.on('data', function(data){
-        console.log('requset: ', data.toString());
-        res.send(data);
-        //res.json(data);//(JSON.stringify({"Write": data.toString()}), (err) => {
-        //    console.log(err);
-        //});
-    });
-    req.on('end', function(){
-        console.log('the end ');
-        res.end();
-    });
 });
