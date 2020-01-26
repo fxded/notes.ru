@@ -3,22 +3,38 @@
 
 document.querySelector('#btnsnd').onclick = function () {
     let fname = document.querySelector('#fname').value,
-        lname = document.querySelector('#lname').value;
-    
-    let data = JSON.stringify({ fname: fname,
+        lname = document.querySelector('#lname').value,
+        data = JSON.stringify({ fname: fname,
                                 lname: lname  });
+        
     ajax('/', 'POST', showData, data);
 }
 
 document.querySelector('#btnsnd2').onclick = function () {
     let nTitle = document.querySelector('#noteTitle').value,
-        nBody = document.querySelector('#noteBody').value;
-    
-    let data = JSON.stringify({ nTitle: nTitle,
-                                nBody: nBody  });
+        nBody = document.querySelector('#noteBody').value,
+        data = JSON.stringify({ nTitle  : nTitle,
+                                nBody   : nBody  });
+        
     ajax('/notes', 'POST', showData, data);
 }
 
+document.querySelector('#btnsnd3').onclick = function () {
+    let id = document.querySelector('#idNote').value,
+        url = '/notes/'+id,
+        data = null;
+        
+    ajax(url, 'GET', receivGetData, data);
+}
+
+function receivGetData (data) {
+    data = JSON.parse(data.response);
+    console.log(data);
+    let getNoteDiv = document.querySelector('#getNoteDiv'),
+        newP    = document.createElement("p");
+    getNoteDiv.appendChild(newP);
+    newP.innerHTML =  data.title+'<br>'+data.text;
+}
 
 function showData(data) {
     data = JSON.parse(data.response);

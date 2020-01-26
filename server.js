@@ -18,12 +18,4 @@ dbClient.connect(err => {
         console.log('Listen on ' + port + ' dir ' + __dirname + 
                     ' dbase: ' +  dbase.namespace);
     });
-    //console.log(dbase);
-    //dbClient.close();
-});
-
-
-app.get('/', function(req,res){
-    res.sendfile('index.html');
-    res.end();
 });
