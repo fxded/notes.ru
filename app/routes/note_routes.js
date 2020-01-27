@@ -75,5 +75,22 @@ module.exports = function(app, db) {
             console.log('end of requset');
         });
     });
+
+    app.delete ('/notes/:id', (req, res) => {
+        const   id      = req.params.id,
+                details = { '_id': new ObjectID(id) };
+
+        console.log('______delete: ', details);
+        db.collection('notes').deleteOne(details, (err, item) => {
+            if (err) {
+                res.send('bd_error: ',err);
+            } else {
+                console.log('note ' + id + ' is deleted');
+                res.send({ "delete" : 'note ' + id + ' is deleted'});
+                res.end();
+            } 
+        });
+  });
+
     
 };

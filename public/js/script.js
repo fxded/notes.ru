@@ -27,13 +27,35 @@ document.querySelector('#btnsnd3').onclick = function () {
     ajax(url, 'GET', receivGetData, data);
 }
 
+document.querySelector('#btnsnd4').onclick = function () {
+    let id = document.querySelector('#delIdNote').value,
+        url = '/notes/'+id,
+        data = null;
+        
+    ajax(url, 'DELETE', receivGetData, data);
+}
+
 function receivGetData (data) {
-    data = JSON.parse(data.response);
+    if (data.response != "") {
+        data = JSON.parse(data.response);
+    }    
     console.log(data);
-    let getNoteDiv = document.querySelector('#getNoteDiv'),
+    if ('title' in data) {
+        let getNoteDiv = document.querySelector('#getNoteDiv'),
+            newP    = document.createElement("p");
+        getNoteDiv.appendChild(newP);
+        newP.innerHTML =  data.title+'<br>'+data.text;
+        return;
+    } else {
+        let delNoteDiv = document.querySelector('#delNoteDiv'),
+            newP    = document.createElement("p");
+        delNoteDiv.appendChild(newP);
+        newP.innerHTML =  JSON.stringify(data);
+    }
+    let delNoteDiv = document.querySelector('#delNoteDiv'),
         newP    = document.createElement("p");
-    getNoteDiv.appendChild(newP);
-    newP.innerHTML =  data.title+'<br>'+data.text;
+    delNoteDiv.appendChild(newP);
+    newP.innerHTML =  "This note is not found";
 }
 
 function showData(data) {
