@@ -35,13 +35,14 @@ module.exports = function(app, db) {
             } 
         });
   });
-    
- /*   app.get ('/notes/:id', (req, res) => {
+ /*   
+    app.get ('/notes/:id', (req, res) => {
+        console.log(req);
         req.on('data', (data) => {
             console.log('req: ',data);
-            const   id      = 888,
+            const   id      = data.id,
                     details = { '_id': new ObjectID(id) };
-            console.log(req);
+            //console.log(req);
             db.collection('notes').findOne(details, (err, item) => {
                 if (err) {
                     console.log('bd_error: ', err);
@@ -52,8 +53,12 @@ module.exports = function(app, db) {
                 }
             });    
         });
+        req.on('end', function(){
+            console.log('end of requset');
+        });
+
     });
-   */
+*/
 
     app.post('/notes', (req, res) => {
         req.on('data', function(data){
@@ -92,5 +97,27 @@ module.exports = function(app, db) {
         });
   });
 
-    
+    app.put ('/notes/:id', (req,res) => {
+        req.on('data', function(data){
+            console.log('requset: ', data.toString());
+            const   id      = req.params.id,
+                    details = { '_id': new ObjectID(id) },
+                    dataToNote = JSON.parse(data),
+                    note = { text: dataToNote.nBody, title: dataToNote.nTitle };
+                    
+            db.collection('notes').replaceOne(details, note, (err, result) => {
+                if (err) {
+                    console.log('bd_error: ', err);
+                } else {
+                    console.log('result of insert: ', result.ops[0]);
+                    res.send(result.ops[0]);
+                    res.end();
+                }
+            });
+        });
+        req.on('end', function(){
+            console.log('end of requset');
+        });
+
+    });
 };

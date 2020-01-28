@@ -23,16 +23,36 @@ document.querySelector('#btnsnd3').onclick = function () {
     let id = document.querySelector('#idNote').value,
         url = '/notes/'+id,
         data = null;
-        
-    ajax(url, 'GET', receivGetData, data);
+    if (!checkId(id)) 
+        alert('input valid id');  
+    else   
+        ajax(url, 'GET', receivGetData, data);
 }
 
 document.querySelector('#btnsnd4').onclick = function () {
     let id = document.querySelector('#delIdNote').value,
         url = '/notes/'+id,
         data = null;
+    console.log(id.length);    
+    if (!checkId(id)) 
+        alert('input valid id');  
+    else   
+        ajax(url, 'DELETE', receivGetData, data);
+}
+
+document.querySelector('#btnsnd5').onclick = function () {
+    let id = document.querySelector('#idNote').value,
+        url = '/notes/'+id,
+        nTitle = document.querySelector('#noteTitle').value,
+        nBody = document.querySelector('#noteBody').value,
+        data = JSON.stringify({ nTitle  : nTitle,
+                                nBody   : nBody  });
         
-    ajax(url, 'DELETE', receivGetData, data);
+        
+    if (!checkId(id)) 
+        alert('input valid id');  
+    else   
+        ajax(url, 'PUT', showData, data);
 }
 
 function receivGetData (data) {
@@ -41,10 +61,12 @@ function receivGetData (data) {
     }    
     console.log(data);
     if ('title' in data) {
-        let getNoteDiv = document.querySelector('#getNoteDiv'),
-            newP    = document.createElement("p");
-        getNoteDiv.appendChild(newP);
-        newP.innerHTML =  data.title+'<br>'+data.text;
+        document.querySelector('#noteTitle').value = data.title;
+        document.querySelector('#noteBody').value = data.text;
+        //    newP    = document.createElement("p");
+        //getNoteDiv.appendChild(newP);
+        //newP.innerHTML =  data.title+'<br>'+data.text;
+        
         return;
     } else {
         let delNoteDiv = document.querySelector('#delNoteDiv'),
@@ -71,3 +93,7 @@ function showData(data) {
     }
 }
 
+function checkId (id) {
+    if (id.length != 24) return false;
+    return true;
+}
