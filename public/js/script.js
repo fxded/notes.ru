@@ -55,6 +55,10 @@ document.querySelector('#btnsnd5').onclick = function () {
         ajax(url, 'PUT', showData, data);
 }
 
+document.querySelector('#btnsnd6').onclick = function () {
+        ajax('/notes/all/find', 'GET', receivGetData, null);
+}
+
 function receivGetData (data) {
     if (data.response != "") {
         data = JSON.parse(data.response);

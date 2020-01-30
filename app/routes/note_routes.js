@@ -120,4 +120,17 @@ module.exports = function(app, db) {
         });
 
     });
+
+    app.get ('/notes/all/find', (req, res) => {
+        db.collection('notes').find().toArray((err, item) => {
+            if (err) {
+                res.send('bd_error: ',err);
+            } else {
+                console.log('result of get all item: ',item);
+                res.send(item);
+                res.end();
+            } 
+        });
+    });
+
 };
