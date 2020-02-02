@@ -10,28 +10,69 @@
 </head>
 
 <body>
-    <a href="/">Home</a>
+    <div> 
+        <h2>Server return First and Last names</h2>
+        <div class="col-3 input-effect">
+            <input class="effect-16" id="fname" type="text" name="fname">
+            <label>First name</label>
+        </div>
+
+        <div class="col-3 input-effect">    
+            <input class="effect-16" id="lname" type="text" name="lname">
+            <label>Last name</label>
+        </div>
+    <div class="btn from-left col-3" id="btnsnd">Send!</div>
+    <span class="focus-border"></span>    
+    </div>
     <div>
-        <p>Name: <input id="fname" type="text" name="fname"></p>
-        <p>Last Name: <input id="lname" type="text" name="lname"></p>
-        <button id="btnsnd">Send!</button>
-    </div> 
-    <div id="noteDiv">
-        <p>Title: <input id="noteTitle" type="text" name="noteTitle"></p>
-        <p>Body: <input id="noteBody" type="text" name="noteBody"></p>
-        <button id="btnsnd2">Send!</button>
-    </div>
-    <div id="getNoteDiv">
-        <p>Note id: <input id="idNote" type="text" name="id"></p>
-        <button id="btnsnd3">Get note!</button><button id="btnsnd5">Update the note!</button>
-    </div>
-    <div id="delNoteDiv">
-        <p>Note id: <input id="delIdNote" type="text" name="idNote"></p>
-        <button id="btnsnd4">Delete note</button>
-    </div>
-    <button id="btnsnd6">Get all notes!</button>
+        <h2>Create, read, update and delete notes</h2>
+        <div> 
+            <h3>Create notes</h3>
+            <div class="col-3 input-effect" id="noteDiv">
+                <input class="effect-16" id="noteTitle" type="text" name="noteTitle">
+                <label>Title:</label>
+            </div>
+            <div class="col-3 input-effect" id="noteDiv">
+                <input class="effect-16" id="noteBody" type="text" name="noteBody">
+                <label>Body:</label>
+            </div>
+            <span class="focus-border"></span>    
+            <div class="btn from-left col-3" id="btnsnd2">Send!</div>
+        </div>
+      
+        <div> 
+            <h3>Read and update the note</h3>
+            <div class="col-3 input-effect" id="getNoteDiv">
+                <input class="effect-16" id="idNote" type="text" name="id">
+                <label>Note id</label>
+            </div>
+            <span class="focus-border"></span>    
+            <div class="btn from-left col-3" id="btnsnd3">Get note!</div>
+            <div class="btn from-left col-3" id="btnsnd5">Update the note!</div>
+        </div>
+        
+        <h3>Delete the note</h3>
+        <div> 
+            <div class="col-3 input-effect" id="delNoteDiv">
+                <input class="effect-16" id="delIdNote" type="text" name="idNote">
+                <label>Note id</label>
+            </div>
+            <span class="focus-border"></span>    
+            <div class="btn from-left col-3" id="btnsnd4">Delete note</div>
+        </div>
+
+        <div> 
+            <h3>Find all notes</h3>
+            <span class="focus-border"></span>    
+            <div class="btn from-left col-3" id="btnsnd6">Get all notes!</div>
+        </div>
+    </div>    
+        
     <script src="js/ajax.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/css.js"></script>
+              
+
 </body>
 
 </html>
